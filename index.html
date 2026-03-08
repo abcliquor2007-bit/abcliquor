@@ -1,979 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ABC Liquor — Beer, Wine & Spirits. Great prices, huge selection, and friendly service." />
-  <title>ABC Liquor | Beer • Wine • Spirits</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --burgundy: #6b0012;
-      --burgundy-dark: #4c000c;
-      --gold: #d4af37;
-      --cream: #fff8ef;
-      --text: #1b1b1b;
-      --muted: #666;
-      --white: #ffffff;
-      --gray-bg: #f7f5f2;
-      --shadow: 0 16px 40px rgba(0,0,0,0.12);
-      --radius: 22px;
-      --max: 1200px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: var(--white);
-      line-height: 1.6;
-    }
-
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
-
-    .topbar {
-      background: var(--burgundy-dark);
-      color: #f9e8d0;
-      font-size: 14px;
-      padding: 10px 0;
-    }
-    .topbar-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-height: 78px;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-    }
-
-    .logo-mark {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--burgundy), #8e0a20);
-      display: grid;
-      place-items: center;
-      color: var(--white);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      box-shadow: var(--shadow);
-    }
-
-    .logo-text strong {
-      display: block;
-      font-size: 17px;
-      line-height: 1.1;
-    }
-
-    .logo-text span {
-      display: block;
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 24px;
-      padding: 0;
-      margin: 0;
-      align-items: center;
-    }
-
-    nav a {
-      color: var(--text);
-      font-weight: 600;
-      font-size: 15px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border-radius: 999px;
-      font-weight: 700;
-      transition: 0.25s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    .btn-primary {
-      background: var(--burgundy);
-      color: var(--white);
-      box-shadow: 0 10px 24px rgba(107,0,18,0.28);
-    }
-
-    .btn-primary:hover { transform: translateY(-1px); background: #820018; }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--burgundy);
-      border: 1.5px solid rgba(107,0,18,0.18);
-    }
-
-    .hero {
-      background:
-        linear-gradient(rgba(26, 10, 12, 0.45), rgba(26, 10, 12, 0.55)),
-        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80') center/cover;
-      color: var(--white);
-    }
-
-    .hero-inner {
-      min-height: 88vh;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 32px;
-      align-items: center;
-      padding: 72px 0;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.18);
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 20px;
-    }
-
-    h1, h2, h3 {
-      margin: 0 0 14px;
-      line-height: 1.05;
-    }
-
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px, 7vw, 88px);
-      font-weight: 700;
-    }
-
-    .hero p {
-      max-width: 640px;
-      font-size: 18px;
-      color: rgba(255,255,255,0.92);
-      margin-bottom: 28px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .hero-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 28px;
-    }
-
-    .hero-card {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 20px;
-      padding: 18px;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-card strong {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 6px;
-    }
-
-    .promo-panel {
-      background: rgba(255, 248, 239, 0.94);
-      color: var(--text);
-      border-radius: 26px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      justify-self: end;
-      max-width: 390px;
-    }
-
-    .promo-panel h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 38px;
-      color: var(--burgundy);
-      margin-bottom: 10px;
-    }
-
-    .promo-tag {
-      display: inline-block;
-      padding: 6px 12px;
-      background: rgba(107,0,18,0.08);
-      color: var(--burgundy);
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-
-    .promo-list {
-      display: grid;
-      gap: 12px;
-      margin: 18px 0 24px;
-    }
-
-    .promo-item {
-      display: flex;
-      align-items: start;
-      gap: 10px;
-      color: #433;
-      font-size: 15px;
-    }
-
-    .check {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: rgba(212,175,55,0.18);
-      color: var(--burgundy);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      flex: 0 0 auto;
-      margin-top: 2px;
-    }
-
-    section { padding: 84px 0; }
-    .section-header {
-      text-align: center;
-      max-width: 760px;
-      margin: 0 auto 42px;
-    }
-
-    .section-header .label {
-      color: var(--burgundy);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      font-size: 12px;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-
-    .section-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(34px, 5vw, 54px);
-    }
-
-    .section-header p {
-      color: var(--muted);
-      font-size: 17px;
-      margin: 0;
-    }
-
-    .categories {
-      background: var(--gray-bg);
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .card {
-      background: var(--white);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 8px 26px rgba(0,0,0,0.08);
-      transition: 0.3s ease;
-    }
-
-    .card:hover { transform: translateY(-6px); }
-
-    .card-image {
-      height: 250px;
-      overflow: hidden;
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .card-content { padding: 24px; }
-    .card h3 {
-      font-size: 24px;
-      margin-bottom: 8px;
-      font-family: 'Cormorant Garamond', serif;
-      color: var(--burgundy);
-    }
-    .card p { margin: 0 0 16px; color: var(--muted); }
-    .pill {
-      display: inline-block;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(107,0,18,0.08);
-      color: var(--burgundy);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .deals-wrapper {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .deal-banner {
-      background: linear-gradient(135deg, var(--burgundy), #930820);
-      color: var(--white);
-      padding: 36px;
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 100%;
-    }
-
-    .deal-banner h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 44px;
-      margin-bottom: 12px;
-    }
-
-    .deal-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .deal-card {
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 22px;
-      padding: 24px;
-      background: var(--white);
-    }
-
-    .deal-card .price {
-      font-size: 36px;
-      font-weight: 800;
-      color: var(--burgundy);
-      line-height: 1;
-      margin: 10px 0;
-    }
-
-    .deal-card small {
-      color: var(--muted);
-      display: block;
-    }
-
-    .about {
-      background: var(--cream);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 38px;
-      align-items: center;
-    }
-
-    .about-panel {
-      background: var(--white);
-      border-radius: 30px;
-      padding: 36px;
-      box-shadow: var(--shadow);
-    }
-
-    .features {
-      display: grid;
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .feature {
-      display: flex;
-      gap: 14px;
-      align-items: start;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .feature:last-child { border-bottom: none; }
-    .icon-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: rgba(107,0,18,0.08);
-      display: grid;
-      place-items: center;
-      color: var(--burgundy);
-      font-size: 20px;
-      font-weight: 700;
-      flex: 0 0 auto;
-    }
-
-    .hours-contact {
-      background: var(--gray-bg);
-    }
-
-    .hc-grid {
-      display: grid;
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 24px;
-    }
-
-    .panel {
-      background: var(--white);
-      border-radius: 28px;
-      padding: 30px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-    }
-
-    .hours-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .hours-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px dashed rgba(0,0,0,0.1);
-    }
-
-    .map-frame {
-      width: 100%;
-      height: 100%;
-      min-height: 360px;
-      border: 0;
-      border-radius: 24px;
-    }
-
-    .contact-form {
-      display: grid;
-      gap: 14px;
-      margin-top: 20px;
-    }
-
-    .input, textarea {
-      width: 100%;
-      border: 1px solid rgba(0,0,0,0.12);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font: inherit;
-      outline: none;
-      background: #fff;
-    }
-
-    .input:focus, textarea:focus {
-      border-color: rgba(107,0,18,0.5);
-      box-shadow: 0 0 0 4px rgba(107,0,18,0.08);
-    }
-
-    footer {
-      background: #13080a;
-      color: rgba(255,255,255,0.78);
-      padding: 24px 0 36px;
-    }
-
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-      flex-wrap: wrap;
-      padding-top: 20px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .age-gate {
-      position: fixed;
-      inset: 0;
-      background: rgba(12, 3, 5, 0.82);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 2000;
-    }
-
-    .age-card {
-      width: min(520px, 100%);
-      background: var(--white);
-      border-radius: 28px;
-      padding: 34px;
-      text-align: center;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.32);
-    }
-
-    .age-card h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      color: var(--burgundy);
-      margin-bottom: 10px;
-    }
-
-    .age-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 22px;
-    }
-
-    .notice {
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 18px;
-    }
-
-    .mobile-toggle {
-      display: none;
-      background: transparent;
-      border: none;
-      font-size: 28px;
-      color: var(--burgundy);
-      cursor: pointer;
-    }
-
-    @media (max-width: 1000px) {
-      .hero-inner,
-      .deals-wrapper,
-      .about-grid,
-      .hc-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .promo-panel { justify-self: start; max-width: 100%; }
-      .grid-3 { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 760px) {
-      .mobile-toggle { display: inline-block; }
-
-      nav {
-        position: absolute;
-        top: 78px;
-        left: 0;
-        right: 0;
-        background: var(--white);
-        border-bottom: 1px solid rgba(0,0,0,0.08);
-        padding: 16px;
-        display: none;
-      }
-
-      nav.open { display: block; }
-      nav ul { flex-direction: column; align-items: start; gap: 14px; }
-      .nav-actions .btn-secondary { display: none; }
-      .hero-cards,
-      .grid-3,
-      .deal-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-inner { min-height: auto; padding: 52px 0; }
-      .topbar-inner { justify-content: center; text-align: center; }
-      .footer-grid { flex-direction: column; align-items: start; }
-      h1 { font-size: 54px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Liquor | Coming Soon</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Inter',sans-serif;
+background:#0f0406;
+color:white;
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px 20px;
+
+background:
+linear-gradient(rgba(25,5,7,.65),rgba(25,5,7,.75)),
+url("https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1600&q=80")
+center/cover;
+}
+
+.container{
+max-width:1100px;
+width:100%;
+display:grid;
+grid-template-columns:1fr 420px;
+gap:40px;
+align-items:center;
+}
+
+/* LEFT SIDE */
+
+.eyebrow{
+display:inline-block;
+background:rgba(255,255,255,.12);
+padding:8px 14px;
+border-radius:999px;
+font-size:12px;
+letter-spacing:2px;
+margin-bottom:18px;
+text-transform:uppercase;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:80px;
+line-height:0.9;
+margin-bottom:20px;
+}
+
+.subtitle{
+font-size:18px;
+color:rgba(255,255,255,.85);
+margin-bottom:30px;
+max-width:520px;
+}
+
+.btn{
+display:inline-block;
+padding:14px 22px;
+border-radius:999px;
+font-weight:600;
+margin-right:10px;
+transition:.25s;
+cursor:pointer;
+}
+
+.btn-primary{
+background:#6b0012;
+color:white;
+}
+
+.btn-secondary{
+background:rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.25);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+}
+
+/* CARD */
+
+.card{
+background:#fff8ef;
+color:#1a1a1a;
+padding:30px;
+border-radius:24px;
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.card h2{
+font-family:'Cormorant Garamond',serif;
+font-size:40px;
+margin-bottom:10px;
+color:#6b0012;
+}
+
+.label{
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#6b0012;
+font-weight:600;
+margin-top:20px;
+margin-bottom:6px;
+display:block;
+}
+
+.hours{
+font-size:14px;
+display:grid;
+gap:6px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+border-bottom:1px dashed rgba(0,0,0,.12);
+padding-bottom:6px;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:20px;
+font-size:14px;
+background:#0f0406;
+color:rgba(255,255,255,.7);
+}
+
+/* AGE GATE */
+
+.age-gate{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+padding:20px;
+}
+
+.age-box{
+background:white;
+color:#1a1a1a;
+padding:35px;
+border-radius:26px;
+max-width:420px;
+width:100%;
+text-align:center;
+}
+
+.age-box h2{
+font-family:'Cormorant Garamond',serif;
+font-size:42px;
+margin-bottom:10px;
+color:#6b0012;
+}
+
+.age-buttons{
+margin-top:22px;
+display:flex;
+gap:12px;
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.notice{
+font-size:13px;
+margin-top:15px;
+color:#777;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:56px;
+}
+
+}
+
+</style>
 </head>
+
 <body>
-  <div class="age-gate" id="ageGate">
-    <div class="age-card">
-      <div class="pill" style="margin-bottom: 14px;">Welcome to ABC Liquor</div>
-      <h2>Are you 21 or older?</h2>
-      <p>You must be of legal drinking age to enter this site. Please confirm your age to continue.</p>
-      <div class="age-buttons">
-        <button class="btn btn-primary" onclick="enterSite()">Yes, Enter Site</button>
-        <button class="btn btn-secondary" onclick="leaveSite()">No, Exit</button>
-      </div>
-      <p class="notice">Please drink responsibly. Availability of products may vary by location and state law.</p>
-    </div>
-  </div>
 
-  <div class="topbar">
-    <div class="container topbar-inner">
-      <div>📍 2007 8th Ave, Fort Worth, TX 76110</div>
-      <div>⏰ Mon–Sat 10:00 AM – 10:00 PM | Sun 12:00 PM – 8:00 PM</div>
-      <div>📞 (817) 926-5706</div>
-    </div>
-  </div>
+<!-- AGE GATE -->
 
-  <header>
-    <div class="container nav">
-      <a href="#home" class="logo">
-        <div class="logo-mark">A</div>
-        <div class="logo-text">
-          <strong>ABC LIQUOR</strong>
-          <span>Beer • Wine • Spirits</span>
-        </div>
-      </a>
+<div class="age-gate" id="ageGate">
 
-      <button class="mobile-toggle" onclick="toggleMenu()">☰</button>
+<div class="age-box">
 
-      <nav id="navMenu">
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#categories">Products</a></li>
-          <li><a href="#deals">Deals</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#visit">Visit Us</a></li>
-        </ul>
-      </nav>
+<h2>Are you 21+?</h2>
 
-      <div class="nav-actions">
-        <a href="#visit" class="btn btn-secondary">Find Us</a>
-        <a href="tel:+18175550123" class="btn btn-primary">Call Now</a>
-      </div>
-    </div>
-  </header>
+<p>You must be of legal drinking age to enter this website.</p>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container hero-inner">
-        <div>
-          <div class="eyebrow">Premium Selection • Friendly Service</div>
-          <h1>Your Neighborhood Destination for Beer, Wine & Spirits</h1>
-          <p>
-            ABC Liquor offers top brands, local favorites, weekly specials, and a welcoming in-store experience.
-            Whether you are planning a celebration or picking up your go-to bottle, we are here to help.
-          </p>
-          <div class="hero-buttons">
-            <a href="#deals" class="btn btn-primary">Shop Weekly Deals</a>
-            <a href="#categories" class="btn btn-secondary" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.24);">Browse Selections</a>
-          </div>
+<div class="age-buttons">
 
-          <div class="hero-cards">
-            <div class="hero-card">
-              <strong>500+</strong>
-              <span>Beer, wine, and spirit selections</span>
-            </div>
-            <div class="hero-card">
-              <strong>Weekly</strong>
-              <span>Deals on customer favorites</span>
-            </div>
-            <div class="hero-card">
-              <strong>Local</strong>
-              <span>Proudly serving the Fort Worth community</span>
-            </div>
-          </div>
-        </div>
+<button class="btn btn-primary" onclick="enterSite()">Yes, Enter</button>
 
-        <aside class="promo-panel">
-          <div class="promo-tag">This Week at ABC</div>
-          <h3>Premium Taste. Better Prices.</h3>
-          <p>Find a curated selection of whiskey, tequila, wine, champagne, and imported beer with personalized service.</p>
-          <div class="promo-list">
-            <div class="promo-item"><span class="check">✓</span><span>Exclusive bottle specials and seasonal promotions</span></div>
-            <div class="promo-item"><span class="check">✓</span><span>Popular labels plus hard-to-find premium picks</span></div>
-            <div class="promo-item"><span class="check">✓</span><span>Fast help choosing gifts, party supplies, or dinner pairings</span></div>
-          </div>
-          <a href="#visit" class="btn btn-primary" style="width: 100%;">Visit the Store</a>
-        </aside>
-      </div>
-    </section>
+<button class="btn btn-secondary" onclick="leaveSite()">No, Exit</button>
 
-    <section class="categories" id="categories">
-      <div class="container">
-        <div class="section-header">
-          <span class="label">Our Selection</span>
-          <h2>Explore Our Featured Categories</h2>
-          <p>From everyday favorites to celebration-worthy bottles, ABC Liquor is stocked for every occasion.</p>
-        </div>
+</div>
 
-        <div class="grid-3">
-          <article class="card">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?auto=format&fit=crop&w=900&q=80" alt="Premium whiskey bottles" />
-            </div>
-            <div class="card-content">
-              <h3>Whiskey & Bourbon</h3>
-              <p>Classic labels, small-batch bourbons, premium Scotch, and gifting favorites for every budget.</p>
-              <span class="pill">Top Shelf Picks</span>
-            </div>
-          </article>
+<div class="notice">Please drink responsibly.</div>
 
-          <article class="card">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=900&q=80" alt="Wine glasses and wine bottles" />
-            </div>
-            <div class="card-content">
-              <h3>Wine Collection</h3>
-              <p>Red, white, rosé, sparkling, and imported wines selected for dinners, gifts, and celebrations.</p>
-              <span class="pill">Dinner & Events</span>
-            </div>
-          </article>
+</div>
 
-          <article class="card">
-            <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1563379091339-03246963d29a?auto=format&fit=crop&w=900&q=80" alt="Beer bottles and cans on display" />
-            </div>
-            <div class="card-content">
-              <h3>Beer & More</h3>
-              <p>Domestic, imported, craft, and party-pack options with rotating specials on popular brands.</p>
-              <span class="pill">Cold & Ready</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+</div>
 
-    <section id="deals">
-      <div class="container">
-        <div class="section-header">
-          <span class="label">Weekly Specials</span>
-          <h2>Deals That Bring Customers Back</h2>
-          <p>Update these product names and prices anytime to match your current in-store promotions.</p>
-        </div>
 
-        <div class="deals-wrapper">
-          <div class="deal-banner">
-            <div class="pill" style="width: fit-content; background: rgba(255,255,255,0.12); color: #fff;">Limited Time</div>
-            <h3>Save More on Popular Bottles</h3>
-            <p>Promote your featured products here. This section is perfect for Facebook traffic, local search visitors, and seasonal offers.</p>
-            <div class="hero-buttons">
-              <a href="tel:+18175550123" class="btn btn-primary" style="background: var(--white); color: var(--burgundy);">Ask About Availability</a>
-            </div>
-          </div>
+<!-- HERO -->
 
-          <div class="deal-grid">
-            <div class="deal-card">
-              <small>Featured Whiskey</small>
-              <h3>Premium Reserve</h3>
-              <div class="price">$39.99</div>
-              <small>750ml • While supplies last</small>
-            </div>
-            <div class="deal-card">
-              <small>Popular Tequila</small>
-              <h3>Silver Agave</h3>
-              <div class="price">$29.99</div>
-              <small>750ml • Weekly deal</small>
-            </div>
-            <div class="deal-card">
-              <small>Wine Special</small>
-              <h3>House Select</h3>
-              <div class="price">2 / $22</div>
-              <small>Mix and match eligible bottles</small>
-            </div>
-            <div class="deal-card">
-              <small>Beer Promo</small>
-              <h3>Craft Variety Pack</h3>
-              <div class="price">$18.99</div>
-              <small>12 pack • Limited seasonal stock</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="hero">
 
-    <section class="about" id="about">
-      <div class="container about-grid">
-        <div>
-          <div class="section-header" style="text-align: left; margin: 0 0 18px;">
-            <span class="label">About ABC Liquor</span>
-            <h2>Built for Convenience, Selection, and Great Service</h2>
-            <p>We created ABC Liquor to be the go-to local store for quality products, competitive prices, and a smoother shopping experience.</p>
-          </div>
-          <div class="about-panel">
-            <div class="features">
-              <div class="feature">
-                <div class="icon-box">1</div>
-                <div>
-                  <strong>Curated Inventory</strong>
-                  <div>Stock everyday staples, premium labels, celebration bottles, and customer-requested favorites.</div>
-                </div>
-              </div>
-              <div class="feature">
-                <div class="icon-box">2</div>
-                <div>
-                  <strong>Competitive Pricing</strong>
-                  <div>Promote value-driven deals without sacrificing the premium feel of your brand.</div>
-                </div>
-              </div>
-              <div class="feature">
-                <div class="icon-box">3</div>
-                <div>
-                  <strong>Local, Friendly Experience</strong>
-                  <div>Highlight helpful recommendations, neighborhood convenience, and repeat-customer trust.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="container">
 
-        <div class="about-panel">
-          <img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?auto=format&fit=crop&w=1200&q=80" alt="Premium liquor shelf display" style="height: 420px; width: 100%; object-fit: cover; border-radius: 22px; margin-bottom: 22px;" />
-          <h3 style="font-size: 28px; color: var(--burgundy); margin-bottom: 8px;">Perfect for Local Search and Facebook Traffic</h3>
-          <p style="margin: 0; color: var(--muted);">
-            This website is structured to help customers quickly see your hours, location, offers, and product categories.
-            You can later connect your own domain, Google Maps, Meta Pixel, or an online ordering provider.
-          </p>
-        </div>
-      </div>
-    </section>
+<div>
 
-    <section class="hours-contact" id="visit">
-      <div class="container">
-        <div class="section-header">
-          <span class="label">Visit Us</span>
-          <h2>Come See Us In Store</h2>
-          <p>Make it easy for customers to call, find directions, and contact you about availability or promotions.</p>
-        </div>
+<div class="eyebrow">Under Construction</div>
 
-        <div class="hc-grid">
-          <div class="panel">
-            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--burgundy);">Store Hours</h3>
-            <div class="hours-list">
-              <div class="hours-row"><span>Monday</span><strong>10:00 AM – 10:00 PM</strong></div>
-              <div class="hours-row"><span>Tuesday</span><strong>10:00 AM – 10:00 PM</strong></div>
-              <div class="hours-row"><span>Wednesday</span><strong>10:00 AM – 10:00 PM</strong></div>
-              <div class="hours-row"><span>Thursday</span><strong>10:00 AM – 10:00 PM</strong></div>
-              <div class="hours-row"><span>Friday</span><strong>10:00 AM – 11:00 PM</strong></div>
-              <div class="hours-row"><span>Saturday</span><strong>10:00 AM – 11:00 PM</strong></div>
-              <div class="hours-row"><span>Sunday</span><strong>12:00 PM – 8:00 PM</strong></div>
-            </div>
+<h1>ABC Liquor</h1>
 
-            <div style="margin-top: 26px; display: grid; gap: 10px;">
-              <div><strong>Address:</strong> 1238 W 8th Ave, Fort Worth, TX 76102</div>
-              <div><strong>Phone:</strong> <a href="tel:+18175550123" style="color: var(--burgundy);">(817) 555-0123</a></div>
-              <div><strong>Email:</strong> <a href="mailto:hello@abcliquor.com" style="color: var(--burgundy);">hello@abcliquor.com</a></div>
-            </div>
-          </div>
+<p class="subtitle">
+Something big is coming.  
+Our website is currently under construction, but we will be launching soon with new promotions and featured products.
+</p>
 
-          <div class="panel">
-            <iframe
-              class="map-frame"
-              loading="lazy"
-              allowfullscreen
-              referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Fort%20Worth%20TX&output=embed">
-            </iframe>
-          </div>
-        </div>
+<a class="btn btn-primary" href="https://maps.google.com/?q=2007+8th+Ave,+Fort+Worth,+TX+76110" target="_blank">
+Get Directions
+</a>
 
-        <div class="panel" style="margin-top: 24px;">
-          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--burgundy); margin-bottom: 4px;">Contact Us</h3>
-          <p style="margin-top: 0; color: var(--muted);">Ask about product availability, special orders, or store information.</p>
-          <form class="contact-form" onsubmit="submitForm(event)">
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;">
-              <input class="input" type="text" placeholder="Your name" required>
-              <input class="input" type="email" placeholder="Your email" required>
-            </div>
-            <input class="input" type="text" placeholder="Subject">
-            <textarea rows="5" placeholder="Your message"></textarea>
-            <button class="btn btn-primary" type="submit" style="width: fit-content;">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
 
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <strong style="display:block; color:#fff; margin-bottom: 8px;">ABC Liquor</strong>
-          <span>Beer • Wine • Spirits</span>
-        </div>
-        <div class="footer-links">
-          <a href="#home">Home</a>
-          <a href="#categories">Products</a>
-          <a href="#deals">Deals</a>
-          <a href="#about">About</a>
-          <a href="#visit">Visit Us</a>
-        </div>
-        <div>© <span id="year"></span> ABC Liquor. All rights reserved.</div>
-      </div>
-    </div>
-  </footer>
+</div>
 
-  <script>
-    const ageGate = document.getElementById('ageGate');
-    const navMenu = document.getElementById('navMenu');
 
-    function enterSite() {
-      localStorage.setItem('abcLiquorAgeVerified', 'true');
-      ageGate.style.display = 'none';
-    }
+<div class="card" id="info">
 
-    function leaveSite() {
-      window.location.href = 'https://www.google.com';
-    }
+<h2>Visit Us</h2>
 
-    function toggleMenu() {
-      navMenu.classList.toggle('open');
-    }
+<p>Stop by our store while the website is being built.</p>
 
-    function submitForm(event) {
-      event.preventDefault();
-      alert('Thanks for contacting ABC Liquor! Connect this form to Formspree, Netlify Forms, or your email service to receive real submissions.');
-      event.target.reset();
-    }
+<span class="label">Address</span>
 
-    if (localStorage.getItem('abcLiquorAgeVerified') === 'true') {
-      ageGate.style.display = 'none';
-    }
+<div>2007 8th Ave<br>Fort Worth, TX 76110</div>
 
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => navMenu.classList.remove('open'));
-    });
+<span class="label">Hours</span>
 
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+<div class="hours">
+
+<div class="row"><span>Saturday</span><strong>10 AM – 9 PM</strong></div>
+<div class="row"><span>Sunday</span><strong>Closed</strong></div>
+<div class="row"><span>Monday</span><strong>10 AM – 9 PM</strong></div>
+<div class="row"><span>Tuesday</span><strong>10 AM – 9 PM</strong></div>
+<div class="row"><span>Wednesday</span><strong>10 AM – 9 PM</strong></div>
+<div class="row"><span>Thursday</span><strong>10 AM – 9 PM</strong></div>
+<div class="row"><span>Friday</span><strong>10 AM – 9 PM</strong></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="footer">
+© <span id="year"></span> ABC Liquor • Fort Worth, Texas
+</div>
+
+
+<script>
+
+function enterSite(){
+localStorage.setItem("abc21","true");
+document.getElementById("ageGate").style.display="none";
+}
+
+function leaveSite(){
+window.location.href="https://google.com";
+}
+
+if(localStorage.getItem("abc21")==="true"){
+document.getElementById("ageGate").style.display="none";
+}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+</script>
+
 </body>
 </html>
